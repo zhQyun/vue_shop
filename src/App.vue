@@ -1,36 +1,60 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
+  <div id="app" class="platform">
     <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>el-button</el-button>
+      <router-view></router-view>
+      <router-view name="login"></router-view>
     </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import TYPE from './store/storeType';
+  import api from './api/webpackAPI'
+  export default {
+    data(){
+      return{
+        serverUser: "xzadmin",
+        serverPasswd: "Xzsafe110",
+        // videoUrl:api.videoUrl
+      }
+    },
+    methods:{
+      getVideoUrl(){
+        let param = {
+          "user": this.serverUser,
+          "password": this.serverPasswd,
+          "force": 0,
+          "login_mode": 0
+        };
+        this.$axios.post(this.videoUrl+'/login', param,'NowithCredentials').then((res) => {
+          if (res.data.ret == 0) {
+            //获取的token，并作为申请预览时的url附带参数
+            // this.$store.dispatch(TYPE.videoToken, res.data.tk);
+            this.$store.commit(TYPE.getToken,res.data.tk);
+          } else{
+            alert(res.data.msg)
+          }
+        });
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+      },
+    },
+    created(){
+      // this.getVideoUrl()
+    },
   }
-}
 </script>
+<style scoped>
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /*.platform {*/
+    /*width: 100%;*/
+    /*height: auto;*/
+    /*min-height: 100vh;*/
+    /*background: url(./assets/login_Bj.png) no-repeat left top;*/
+    /*background-size: cover;*/
+  /*}*/
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
