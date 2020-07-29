@@ -3,15 +3,15 @@
 <div>
   <div class="table">
 <el-tag
-  v-for="tag in tags"
-  :key="tag"
+  v-for="(tag,index) in tags"
+  :key="index"
   closable
-  @close="DeleteName(tag)"
+  @close="DeleteName(index)"
 >
   {{tag}}
 </el-tag>
-<el-button class="button" v-if="!open" style="padding:1px 5px" @click="OpenInput()">+new tag</el-button>
-<el-input class="input" v-model="inputname" v-if="open" @keyup.enter.native="submit"></el-input>
+<el-button class="button" v-show="!open" style="padding:1px 5px" @click="OpenInput()">+new tag</el-button>
+<el-input class="input" v-model="inputname" v-show="open" @keyup.enter.native="submit"></el-input>
   </div>
 </div>
 </template>
@@ -31,15 +31,15 @@ export default {
         this.open=true;
       },
       submit() {
-         console.log(this.tags);
+        console.log(this.tags);
         this.open=false;
         this.tags.push(this.inputname);
         this.inputname='';
         
       },
-      DeleteName(tag) {
+      DeleteName(index) {
        
-         this.tags.splice(this.tags.indexOf(tag), 1);
+         this.tags.splice(index, 1);
       
       }
      
@@ -61,6 +61,10 @@ export default {
     width: 73.34px;
     margin-left: 10px;
     vertical-align: bottom;
+}
+.el-input__inner {
+    height: 24px;
+    width: 73.34px;
 }
 
 </style>
