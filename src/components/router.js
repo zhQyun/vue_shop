@@ -38,6 +38,7 @@ const routes = [
       {path:'/custom1',name:'custom1',component:custom.custom1},
       {path:'/custom2',name:'custom2',component:custom.custom2},
       {path:'/MenuSettings',name:'MenuSettings',component:custom.MenuSettings},
+      {path:'/Table',name:'Table',component:custom.Table},
 
       // 机构管理
       { path: '/mechanismCategoryManage', name: 'mechanismCategoryManage', component: mechanismManage.mechanismCategoryManage },//机构类别管理

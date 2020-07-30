@@ -193,6 +193,7 @@ export default {
               {name:"自定义1",url:"/custom1",children:[]},
               {name:"自定义2",url:"/custom2",children:[]},
               {name:"菜单设置",url:"/MenuSettings",children:[]},
+              {name:"自定义3",url:"/Table",children:[]},
             ]
           }
         ]
