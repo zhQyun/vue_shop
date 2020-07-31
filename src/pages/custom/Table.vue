@@ -21,7 +21,7 @@
  <el-table
     :data="tableData"
     style="width: 100%"
-    :row-class-name="tableRowClassName">
+    >
     <el-table-column
       prop="statistics"
       label="统计"
@@ -72,46 +72,35 @@
       </template>
     </el-table-column>      
 
+
+
   </el-table>
-     
+
+  <TableModal
+v-show="showModal"
+@closeSelf="clodata"
+@confirm="condata"
+ >
+  </TableModal>
+
+
+
+
+
  </div>
 </div>
 </template>
 
 
 <script>
+import TableModal from "./TableModal.vue";
   export default {
-    methods: {
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 3) {
-          return 'success-row';
-        }
-        return '';
-      
-      },
-      // 新增
-      addRow() {
-console.log('1111');
-      },
-      // 启用
-      handleStar() {
-
-      },
-      // 编辑
-      handleEdit() {
-
-      },
-      //删除
-      handleDelete() {
-
-      } 
-    },
+    components: {TableModal},
     data() {
       return {
-        formInline:'',
+      
         checkAll:false,
+        showModal:false,
         tableData: [{
 
           statistics: '1231',
@@ -135,7 +124,42 @@ console.log('1111');
           state:0
         }]
       }
+    },
+    methods: {
+     
+      
+      
+      // 新增
+      addRow() {
+this.showModal=true;
+      },
+      // 启用
+      handleStar() {
+
+      },
+      // 编辑
+      handleEdit() {
+
+      },
+      //删除
+      handleDelete() {
+
+      } ,
+      toggleModal:function(){
+      this.showModal = !this.showModal;
+    },
+    clodata(msg) {
+      console.log(msg);
+      this.showModal=false
+    },
+    condata(date) {
+      console.log(date);
+      this.showModal=false
+   
+    
+    },
     }
+
   }
 </script>
 <style>
