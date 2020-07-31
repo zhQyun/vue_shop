@@ -93,7 +93,7 @@
       },
       // 新增
       addRow() {
-
+console.log('1111');
       },
       // 启用
       handleStar() {
