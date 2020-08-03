@@ -10,7 +10,7 @@
   <el-form-item>
     <el-button type="primary"  icon="el-icon-search">查询</el-button>
     <el-button type="primary"  icon="el-icon-refresh">重置</el-button>
-     <el-button  type="success" icon="el-icon-plus" @click="addRow()">新增</el-button>
+     <el-button  type="success" icon="el-icon-plus"  @click="addRow()">新增</el-button>
     <el-button type="danger" icon="el-icon-delete">删除</el-button>
   </el-form-item>
   <div>
@@ -77,9 +77,7 @@
   </el-table>
 
   <TableModal
-v-show="showModal"
-@closeSelf="clodata"
-@confirm="condata"
+:visible.sync="dialogTableVisible"
  >
   </TableModal>
 
@@ -100,7 +98,8 @@ import TableModal from "./TableModal.vue";
       return {
       
         checkAll:false,
-        showModal:false,
+        dialogTableVisible:false,
+        showcompileModal:false,
         tableData: [{
 
           statistics: '1231',
@@ -131,18 +130,23 @@ import TableModal from "./TableModal.vue";
       
       // 新增
       addRow() {
-this.showModal=true;
+      console.log(this.dialogTableVisible);
+      this.dialogTableVisible=true
+
       },
       // 启用
-      handleStar() {
-
+      handleStar(index) {
+console.log(index);
+this.tableData[index].state=1
       },
       // 编辑
       handleEdit() {
 
       },
       //删除
-      handleDelete() {
+      handleDelete(val) {
+        console.log(val);
+        this.tableData.splice(val,1)
 
       } ,
       toggleModal:function(){
@@ -152,9 +156,10 @@ this.showModal=true;
       console.log(msg);
       this.showModal=false
     },
-    condata(date) {
-      console.log(date);
+    condata(deta) {
+      console.log(deta);
       this.showModal=false
+      let newDate=dete
    
     
     },
