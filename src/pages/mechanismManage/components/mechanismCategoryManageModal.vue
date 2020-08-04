@@ -52,7 +52,7 @@ export default {
     isOpen(val){
       
       this.mIsOpen=val
-      // console.log(this.mIsOpen)
+     
       if(this.data){
         // console.log(this.data)
         this.ruleForm=this.data
