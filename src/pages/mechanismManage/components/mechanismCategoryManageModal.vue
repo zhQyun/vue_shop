@@ -95,6 +95,7 @@ export default {
     }
   },
   methods: {
+    
     save(){
       this.$refs.ruleForm.validate(valid=>{
             if(valid){

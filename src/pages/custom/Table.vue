@@ -78,6 +78,13 @@
 
   <TableModal
 :isOpen.sync="addModal"
+@confirm="save"
+ >
+  </TableModal>
+  <TableModal
+:isOpen.sync="editModal"
+:data="editData"
+@confirm="editModalData"
  >
   </TableModal>
 
@@ -92,11 +99,11 @@ import TableModal from "./TableModal.vue";
     components: {TableModal},
     data() {
       return {
-      
         checkAll:false,
         addModal:false,
-
+        editModal:false,
         showcompileModal:false,
+        editData:{},
         tableData: [{
 
           statistics: '1231',
@@ -129,8 +136,11 @@ import TableModal from "./TableModal.vue";
       addRow() {
      
       this.addModal=true;
-       console.log(this.addModal);
+     
 
+      },
+      save(data) {
+       this.tableData.push(data)
       },
       // 启用
       handleStar(index) {
@@ -138,7 +148,13 @@ import TableModal from "./TableModal.vue";
 this.tableData[index].state=1
       },
       // 编辑
-      handleEdit() {
+      handleEdit(val) {
+        this.editModal=true,
+        this.editData=this.tableData[val]
+      
+
+      },
+      editModalData(val) {
 
       },
       //删除

@@ -119,6 +119,7 @@ export default {
         // this.getData()
     },
     methods:{
+        
         // 
         addFirstMenu(index){
             let item ={
@@ -139,12 +140,19 @@ export default {
         },
         // 删除一级菜单
         deleteFirstMenu(index){
+
+
+
+
+
+readByAsync();
             Vue.nextTick(() => {
             this.table.splice(index,1);
             })
         },
         // 删除二级菜单
-        deleteSecondMenu(index,serial){            
+        deleteSecondMenu(index,serial){  
+
             Vue.nextTick(() => {
             this.table[index].children.splice(serial,1)
             })

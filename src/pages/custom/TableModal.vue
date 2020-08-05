@@ -2,15 +2,21 @@
 <template>
 <div>
   <el-dialog title="收货地址"  :visible.sync="dialogVisible">
-  <el-table :data="gridData">
-    <el-table-column property="date" label="日期" width="150"></el-table-column>
-    <el-table-column property="name" label="姓名" width="200"></el-table-column>
-    <el-table-column property="address" label="地址"></el-table-column>
-    
-  </el-table>
+    <el-form ref="form" :model="form" label-width="80px">
+   <el-form-item label="统计">
+    <el-input v-model="form.statistics"></el-input>
+  </el-form-item>
+   <el-form-item label="姓名">
+    <el-input v-model="form.name"></el-input>
+  </el-form-item>
+   <el-form-item label="机构数">
+    <el-input v-model="form.count"></el-input>
+  </el-form-item>
+    </el-form>
+
     <div slot="footer" class="dialog-footer">
     <el-button @click="cancel ()">取 消</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+    <el-button type="primary" @click="confirm ()">确 定</el-button>
   </div>
 </el-dialog>
 </div>
@@ -22,58 +28,59 @@ export default {
     props:{
       isOpen:{
         type:Boolean,
+    },
+    data:{
+      type:Object
     }
     },
    
    data() {
       return {
-        gridData: [{
-          date: '2016-05-02',
-          name: '王虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
-     
         dialogVisible: this.isOpen,
         form: {
+          statistics: '',
           name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+          count: '',
+          state:1
         },
         formLabelWidth: '120px'
       };
     },
     watch: {
       isOpen(val) {
-        this.dialogVisible=val
+        this.dialogVisible=val;
+        console.log(val);
+        if(this.data) {
+          this.form=this.data,
+          console.log(this.form);
+       
+        }
+        if(!val) {
+          
+         this.form={
+         statistics: '',
+          name: '',
+          count: '',
+          state:1
+        }
+        }
+
       },
       dialogVisible(val) {
         this.$emit("update:isOpen",val);
      
-      }
+      },
+     
 
     },
     methods: {
       cancel() {
        
         this.dialogVisible=false
-      
+      },
+      confirm() {
+        this.dialogVisible=false
+        this.$emit("confirm",this.form)
       }
     }
 }

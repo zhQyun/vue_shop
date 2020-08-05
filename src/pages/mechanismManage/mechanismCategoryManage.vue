@@ -138,17 +138,7 @@ export default {
             sort:1,
             id:row.id
         }
-        // console.log(parameter)
-          this.$axios.post("baseCategory/updateSortById", parameter).then(res => {
-          if(200==res.data.code){
-            this.getData()
-            this.$message({
-                  type: "success",
-                  message: "排序成功!"
-                });
-          }
-        
-      });
+
       },
       nextSort(row,index){
         let parameter
